@@ -3,21 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <title>Iva | Frontend Test Task</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    input { display: block; margin-bottom: 10px; padding: 6px; }
+    button { padding: 6px 12px; cursor: pointer; }
+    .error { color: red; margin-top: 10px; }
+  </style>
 </head>
 <body>
 <div>
-<h1>Login</h1>
-  <span>
-<p>Username</p>
-    <input id="username" type="text">
-  </span>
-  <span>
-<p>Password</p>
-    <input id="password" type="password">
-    </span>
-  <div>
-  <button type="submit" id="login" ></button>
-    </div>
+  <h1>Login</h1>
+
+  <p>Username</p>
+  <input id="username" type="text">
+
+  <p>Password</p>
+  <input id="password" type="password">
+
+  <button id="login">Login</button>
+
+  <div id="error" class="error"></div>
 </div>
+
+<script>
+  const loginBtn = document.getElementById('login');
+  const errorDiv = document.getElementById('error');
+
+  const CORRECT_USERNAME = 'admin';
+  const CORRECT_PASSWORD = 'FHBT38Gj';
+
+  loginBtn.addEventListener('click', () => {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    errorDiv.textContent = '';
+
+  
+    if (!username || !password) {
+      errorDiv.textContent = 'Username and password are required.';
+      return;
+    }
+
+
+    if (username.includes(' ') || password.includes(' ')) {
+      errorDiv.textContent = 'Spaces are not allowed.';
+      return;
+    }
+
+ 
+    const regex = /^[a-zA-Z0-9]+$/;
+    if (!regex.test(username) || !regex.test(password)) {
+      errorDiv.textContent = 'Only letters and numbers are allowed.';
+      return;
+    }
+
+  
+    if (username !== CORRECT_USERNAME || password !== CORRECT_PASSWORD) {
+      errorDiv.textContent = 'Invalid username or password.';
+      return;
+    }
+
+
+    window.location.href = 'table.html';
+  });
+</script>
 </body>
 </html>
